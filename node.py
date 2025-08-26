@@ -13,7 +13,8 @@ class Block:
         self.nonce = nonce
         self.hash = hash
         self.transactions = transactions
-        newBlock = str(self.previousHash) + str(self.timestamp) + str(self.nonce) + str(self.hash) + str(self.transactions)
+        #newBlock = str(self.previousHash) + str(self.timestamp) + str(self.nonce) + str(self.hash) + str(self.transactions)
+        newBlock = [self.previousHash, self.timestamp, self.nonce, self.hash, self.transactions]
         return newBlock
 
 class LinkedList():

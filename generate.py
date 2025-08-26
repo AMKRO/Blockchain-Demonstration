@@ -12,13 +12,12 @@ import hashlib
 import time
 from node import LinkedList
 
-llist = LinkedList()
 difficulty = 1
 verbose = False
 
 class Generate:
-    def __init__(self, chain):
-        self.chain = chain
+    def __init__(self):
+        pass
     def calcHash(self, transactions, timestamp, previous_hash, nonce):
         
         block = str(transactions) + str(timestamp) + str(previous_hash) + str(nonce)
@@ -27,20 +26,24 @@ class Generate:
 
     def generateBlock(self, transactionTable):
         if verbose: print(transactionTable)
-        chain_data = self.chain.returnListAsTable()
+        llist = LinkedList()
+        chain_data = llist.returnListAsTable()
+        print("lenCD: ",len(chain_data))
         if len(chain_data) == 0:
             previous_hash = "0" * 64
         else:
-            previous_hash = chain_data[-1]["hash"]
+            print("Chain Data: ",chain_data,"\nChain Data -1[0]: ",chain_data[-1][0])
+            previous_hash = chain_data[-1][0]
 
+        print("PREVIOUS HASH:", previous_hash)
         self.nonce = 0
         while True:
             self.timestamp = time.time()
-            print("PREVIOUS HASH:", previous_hash)
             tempHash = self.calcHash(transactionTable, self.timestamp, previous_hash, self.nonce)
             if verbose: print(tempHash, "NONCE:", self.nonce)
             if tempHash.startswith('0' * difficulty):
                 if verbose: print("BLOCK SUCCESSFULLY MINED!\nHASH:", tempHash)
-                return [tempHash, previous_hash, self.timestamp, self.nonce, transactionTable]
+                #return [tempHash, previous_hash, self.timestamp, self.nonce, transactionTable]
+                return(previous_hash, self.timestamp, self.nonce, tempHash, transactionTable)
             else:
                 self.nonce += 1
