@@ -18,11 +18,14 @@ verbose = False
 class Generate:
     def __init__(self):
         pass
+    # Pass for now, don't need to initialise anything
     def calcHash(self, transactions, timestamp, previous_hash, nonce):
         
         block = str(transactions) + str(timestamp) + str(previous_hash) + str(nonce)
         if verbose: print("BLOCK: ", block)
         return hashlib.sha256(block.encode()).hexdigest()
+    # Calculate the hash - mining function
+    # Encrypt in SHA256, .encode() to convert string to bytes, and .hexdigest() to convert to hexadecimal string
 
     def generateBlock(self, transactionTable):
         if verbose: print(transactionTable)
