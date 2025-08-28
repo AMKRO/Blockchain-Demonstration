@@ -1,3 +1,4 @@
+# Index.py
 ## Import Libraries
 import time
 ## Files
@@ -6,7 +7,7 @@ from node import LinkedList
 from node import Block
 ## Variables
 myList = LinkedList()
-gen = Generate(myList)
+gen = Generate()
 
 transactionList = []
 blockSize = 5
@@ -14,24 +15,32 @@ blockSize = 5
 def addTransaction():
     global transactionList
     transaction = input("Enter Transaction Value: ")
-    if transaction or transaction != "'":
+    # Define transactionList as global variable so it can be accessed - maybe remove (?)
+    if transaction or transaction != "":
         transactionList.append(transaction)
         if len(transactionList) == blockSize:
-            blockData = gen.generateBlock(transactionList)
-            tempHash = blockData[0]
-            previousHash = blockData[1]
-            timestamp = blockData[2]
-            nonce = blockData[3]
+            # Confirm transaction provided is of valid type
+            blockData = gen.generateBlock(transactionList, myList)
+            previousHash = blockData[0]
+            timestamp = blockData[1]
+            nonce = blockData[2]
+            tempHash = blockData[3]
             transactionTable = blockData[4]
+            # Create variables based off block data table IF amount of transactions meets blockSize
 
             block = Block()
-            newBlock = block.makeBlock(previousHash, timestamp, nonce, tempHash, transactionTable)
-            print("New Block: ",newBlock)
+            # Create block object
 
+            newBlock = block.makeBlock(previousHash, timestamp, nonce, tempHash, transactionTable)
+            # Create block with variables defined earlier
+            #print("New Block: ",newBlock)
+            #print(myList.returnListAsTable())
             myList.insertAtEnd(newBlock)
-            myList.printList()
+            # Add block to chain
             transactionList = []
+            print(myList.returnListAsTable())
         return
 
 while True:
     addTransaction()
+    # Repeat add transaction until block size threshold is reached.

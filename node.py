@@ -1,3 +1,5 @@
+# Node.py
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -13,7 +15,8 @@ class Block:
         self.nonce = nonce
         self.hash = hash
         self.transactions = transactions
-        newBlock = str(self.previousHash) + str(self.timestamp) + str(self.nonce) + str(self.hash) + str(self.transactions)
+        #newBlock = str(self.previousHash) + str(self.timestamp) + str(self.nonce) + str(self.hash) + str(self.transactions)
+        newBlock = [self.previousHash, self.timestamp, self.nonce, self.hash, self.transactions]
         return newBlock
 
 class LinkedList():
@@ -65,60 +68,83 @@ class LinkedList():
     
     def printList(self):
         current = self.head
+        # Get the current node
         while current is not None:
             print(current.data,"\n")
+            # Print current node data
             current = current.next
+            # Set current to current.next to retrieve next node, until current equals None.
     
     def returnListAsTable(self):
         current = self.head
+        # Set current to start of list
         table = []
+        # Create table to return as list
         while current is not None:
             table.append(current.data)
             current = current.next
+            # Add current.data to table and set current to next in node, until current equals None.
+        ##print("CHAIN DATA TABLE:\n",table)
         return table
 
     def findNodeFromKey(self, key):
         current = self.head
-
+        # Set current to beginning of chain
         if current is not None and current.data == key:
             return current.data
+            # Return data of current if key is found
         
         while current is not None and current.data != key:
             current = current.next
+            # If current is not None and current.data does not equal key, then change current to the next in the chain.
         if current is None:
             print("Did not find key")
+            # If key not found, print.
             return
 
     def deleteNode(self, key):
         current = self.head
 
         if current is not None and current.data == key:
+            # If current is not none and current.data equals key provided, then:
             self.head = current.next
+            # Remove node from list by changing head to current.next
             current = None
             return
         
         while current is not None and current.data != key:
             current = current.next
+            # If node does not match key, move to next node in chain.
         if current is None:
             print("Did not find key")
+            # If node not found, print.
             return
+        
     def deleteNodeAtIndex(self,index):
         current = self.head
         counter = 0
+        # Set iteration variable to 0
         if self.head is None:
             print("List is empty")
+            # If list does not exist yet, print.
             return
         
         if index == 0:
             self.head = self.head.next
+            # If index = 0, set head of chain to next node in chain; removing the first.
             return
         
         while current is not None and counter < index -1:
+            # While current is not equal to None and the counter variable is less than the index variable minus 1, then:
             current = current.next
             counter += 1
+            # Node = next node in chain, counter + 1 to its value.
         
         if current is None or current.next is None:
+            # If current is None or current next node is None then:
             print("Index does not exist in list.")
+            # Print
             return
 
         current.next = current.next.next
+        # Set current next node to current next node next node
