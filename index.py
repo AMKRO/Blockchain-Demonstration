@@ -1,3 +1,4 @@
+# Index.py
 ## Import Libraries
 import time
 ## Files
@@ -19,7 +20,7 @@ def addTransaction():
         transactionList.append(transaction)
         if len(transactionList) == blockSize:
             # Confirm transaction provided is of valid type
-            blockData = gen.generateBlock(transactionList)
+            blockData = gen.generateBlock(transactionList, myList)
             previousHash = blockData[0]
             timestamp = blockData[1]
             nonce = blockData[2]
@@ -32,8 +33,8 @@ def addTransaction():
 
             newBlock = block.makeBlock(previousHash, timestamp, nonce, tempHash, transactionTable)
             # Create block with variables defined earlier
-            print("New Block: ",newBlock)
-            print(myList.returnListAsTable())
+            #print("New Block: ",newBlock)
+            #print(myList.returnListAsTable())
             myList.insertAtEnd(newBlock)
             # Add block to chain
             transactionList = []

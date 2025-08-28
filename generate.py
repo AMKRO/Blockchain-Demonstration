@@ -1,3 +1,4 @@
+# Generate.py
 ## // Generate Block
 
 # index = position in chain
@@ -27,19 +28,19 @@ class Generate:
     # Calculate the hash - mining function
     # Encrypt in SHA256, .encode() to convert string to bytes, and .hexdigest() to convert to hexadecimal string
 
-    def generateBlock(self, transactionTable):
+    def generateBlock(self, transactionTable, llist):
         if verbose: print(transactionTable)
         # If verbose flag, print debug logs
-        llist = LinkedList()
         chain_data = llist.returnListAsTable()
         # Return data of entire chain as a table
-        print("lenCD: ",len(chain_data))
+        ###print("lenCD: ",len(chain_data))
+        ###print(chain_data)
         if len(chain_data) == 0:
             previous_hash = "0" * 64
             # If no previous hash due to start of chain, set previous hash as 0*64
         else:
-            print("Chain Data: ",chain_data,"\nChain Data -1[0]: ",chain_data[-1][0])
-            previous_hash = chain_data[len(chain_data)-1][0]
+            ###print("Chain Data: ",chain_data,"\nChain Data -1[0]: ",chain_data[-1][0])
+            previous_hash = chain_data[-1][3]
             # If chain is NOT starting, return previous hash as last node in chain data hash.
 
         print("PREVIOUS HASH:", previous_hash)

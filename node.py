@@ -1,3 +1,5 @@
+# Node.py
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -82,6 +84,7 @@ class LinkedList():
             table.append(current.data)
             current = current.next
             # Add current.data to table and set current to next in node, until current equals None.
+        ##print("CHAIN DATA TABLE:\n",table)
         return table
 
     def findNodeFromKey(self, key):
