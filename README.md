@@ -1,5 +1,3 @@
-Whats up gangalang gravy lovers!
+Blockchain Demonstration for school
 
-This is mein blocken-chainen demonstration. It is made in python!! weewooo!!!
-
-If you LOVE GRAVY then USE THIS PROJECT!
+11/09/25 last update
